@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public sealed class GameController : MonoBehaviour
 {
@@ -40,6 +41,14 @@ public sealed class GameController : MonoBehaviour
         createInitialSpawners();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            FailMission();
+        }
+    }
+
     public void addEnemy(Enemy e)
     {
         enemies.Add(e.gameObject);
@@ -62,12 +71,13 @@ public sealed class GameController : MonoBehaviour
         mainCamera.GetComponent<GameCamera>().removeTarget(p);
         if (players.Count == 0)
         {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+            FailMission();
         }
+    }
+
+    public void FailMission()
+    {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     private void OnGUI()
