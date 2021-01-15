@@ -12,6 +12,8 @@ public abstract class AttackPattern : MonoBehaviour
     protected float attackCooldown;
     [SerializeField]
     protected float attackCooldownVariance;
+    [SerializeField]
+    protected float initialDelay;
     protected GameController gameController;
     protected Character character;
 
@@ -25,6 +27,7 @@ public abstract class AttackPattern : MonoBehaviour
     public float PostAttackTime { get { return postAttackTime; } }
     public float AttackCooldown { get { return attackCooldown; } }
     public float AttackCooldownVariance { get { return attackCooldownVariance; } }
+    public float InitialDelay { get { return initialDelay; } }
     public abstract void attack();
     public abstract void startAttack();
     public abstract void endAttack();

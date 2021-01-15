@@ -137,4 +137,4 @@ MonoBehaviour:
   damage: 1
   damageTargets:
   - Enemy
-  maxSpeed: 3
+  maxSpeed: 4

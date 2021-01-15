@@ -7,7 +7,11 @@ public abstract class Enemy : Character
     [SerializeField]
     protected AttackPattern[] baseAttackPatterns;
     [SerializeField]
-    protected float ClusteredAttackVariance;
+    protected float clusteredAttackVariance;
+    [SerializeField]
+    protected int collisionDamage;
+    [SerializeField]
+    protected int score;
 
     protected enum AttackState { reloading, preAttack, postAttack }
     protected struct AttackPatternStatus
@@ -31,7 +35,7 @@ public abstract class Enemy : Character
             attackPattern.initialize(gc, this);
             AttackPatternStatus status = new AttackPatternStatus();
             status.attackPattern = attackPattern;
-            status.attackCD = attackPattern.AttackCooldown;
+            status.attackCD = attackPattern.InitialDelay;
             status.attackState = AttackState.reloading;
             attackStatuses[i] = status;
         }
@@ -64,6 +68,17 @@ public abstract class Enemy : Character
         checkAttack();
     }
 
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject other = collision.gameObject;
+        Player asPlayer = other.GetComponent<Player>();
+        if (asPlayer != null)
+        {
+            asPlayer.applyDamage(collisionDamage);
+            death();
+        }
+    }
+
     protected void restartMoving()
     {
         speed = baseSpeed;
@@ -80,11 +95,23 @@ public abstract class Enemy : Character
         move();
     }
 
+    protected override void death()
+    {
+        if (health <= 0)
+            gameController.addScore(score);
+        // Go backwards to avoid messing up the list
+        for (int i = attackStatuses.Length - 1; i >= 0; i--)
+        {
+            Destroy(attackStatuses[i].attackPattern.gameObject);
+        }
+        base.death();
+    }
+
     protected void checkAttack()
     {
         if (attackStatuses == null)
             return;
-        var cav = Random.Range(-ClusteredAttackVariance, ClusteredAttackVariance);  
+        var cav = Random.Range(-clusteredAttackVariance, clusteredAttackVariance);  
         for (int i = 0; i < attackStatuses.Length; i++)
         {
             attackStatuses[i].attackCD -= Time.deltaTime;

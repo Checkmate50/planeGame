@@ -14,6 +14,7 @@ public sealed class GameController : MonoBehaviour
 
     private List<GameObject> players;
     private List<GameObject> enemies;
+    private int score;
 
     public List<GameObject> Players
     {
@@ -75,6 +76,16 @@ public sealed class GameController : MonoBehaviour
         }
     }
 
+    public int getScore()
+    {
+        return score;
+    }
+
+    public void addScore(int amount)
+    {
+        score += amount;
+    }
+
     public void FailMission()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
@@ -82,13 +93,14 @@ public sealed class GameController : MonoBehaviour
 
     private void OnGUI()
     {
-        int i = 0;
+        int i = 1;
         foreach (GameObject o in players)
         {
             Player p = o.GetComponent<Player>();
-            GUI.Label(new Rect(10, i++ * 30 + 10, 100, 20), "Health: " + p.Health);
+            GUI.Label(new Rect(10, i * 30 - 20, 150, 20), "Player " + i + " Health: " + p.Health);
+            i++;
         }
-
+        GUI.Label(new Rect(200, 10, 100, 20), "Score: " + score);
     }
 
     private void createInitialSpawners()

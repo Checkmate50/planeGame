@@ -21,10 +21,12 @@ public class Player : Character
     private float accelRatio;
 
     [SerializeField]
-    private AttackPattern baseAttackPattern;
+    private AttackPattern[] attackPatterns;
 
-    private AttackPattern attackPattern;
-    private float bcd = 0f;
+    protected struct AttackStatus
+    { public float cd; public AttackPattern attackPattern; }
+
+    private AttackStatus[] attackStatuses;
 
     private Vector2 attackDirection = Vector2.zero;
     Dictionary<string, InputState> inputs = new Dictionary<string, InputState>();
@@ -39,8 +41,14 @@ public class Player : Character
     public override void initialize(GameController gc)
     {
         base.initialize(gc);
-        attackPattern = Instantiate(baseAttackPattern);
-        attackPattern.initialize(gc, this);
+        attackStatuses = new AttackStatus[attackPatterns.Length];
+        for (int i = 0; i < attackPatterns.Length; i++)
+        {
+            var ap = Instantiate(attackPatterns[i]);
+            ap.initialize(gc, this);
+            attackStatuses[i].attackPattern = ap;
+            attackStatuses[i].cd = ap.InitialDelay;
+        }
     }
 
     protected override void Start()
@@ -94,16 +102,19 @@ public class Player : Character
 
     private void checkAttack()
     {
-        if (bcd <= 0)
+        for (int i = 0; i < attackStatuses.Length; i++)
         {
             if (inputs[attack].state)
             {
-                attackPattern.attack();
-                bcd = attackPattern.AttackCooldown;
+                if (attackStatuses[i].cd <= 0)
+                {
+                    attackStatuses[i].attackPattern.attack();
+                    attackStatuses[i].cd = attackStatuses[i].attackPattern.AttackCooldown;
+                }
+                else
+                    attackStatuses[i].cd -= Time.deltaTime;
             }
         }
-        else
-            bcd -= Time.deltaTime;
     }
 
     private void checkMove()

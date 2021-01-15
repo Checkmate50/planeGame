@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8067709367197895534}
   - component: {fileID: 5832638937264676436}
   m_Layer: 7
-  m_Name: StraightShotEnemy
+  m_Name: BasicPlane
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1618736545
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 924ea14b66d249346ae4ea960e5b49d7, type: 3}
   m_Color: {r: 0.9622642, g: 0.003631114, b: 0.8832643, a: 1}
@@ -144,15 +144,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d7e4f346bb44547936495eac09a6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15
-  baseSpeed: 20
+  maxHealth: 10
+  baseSpeed: 10
   moveDown: {fileID: 7482667652216324306, guid: 924ea14b66d249346ae4ea960e5b49d7, type: 3}
   moveLeft: {fileID: 7482667652216324306, guid: 924ea14b66d249346ae4ea960e5b49d7, type: 3}
   moveUp: {fileID: 7482667652216324306, guid: 924ea14b66d249346ae4ea960e5b49d7, type: 3}
   moveRight: {fileID: 7482667652216324306, guid: 924ea14b66d249346ae4ea960e5b49d7, type: 3}
   baseAttackPatterns:
   - {fileID: 6630548701931609769, guid: 33c9588c5777da4449776ff901669e1e, type: 3}
-  ClusteredAttackVariance: 0
-  bounceRatio: 0.05
-  whereToStop: 0.2
-  stopVariation: 0.4
+  clusteredAttackVariance: 0
+  collisionDamage: 2
+  score: 50

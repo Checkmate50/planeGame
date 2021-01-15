@@ -137,4 +137,4 @@ MonoBehaviour:
   damage: 1
   damageTargets:
   - Player
-  maxSpeed: 1
+  maxSpeed: 0.6

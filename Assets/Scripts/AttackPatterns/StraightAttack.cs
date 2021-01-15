@@ -10,13 +10,15 @@ public class StraightAttack : AttackPattern
     protected float aimVariance;
     [SerializeField]
     protected float angle; // Angle from Vector.down
+    [SerializeField]
+    protected Vector2 offset;
 
     public override void attack()
     {
         var dir = Util.Rotate(Vector2.down, angle);
         var aim = Random.Range(-aimVariance, aimVariance);
         dir = Util.Rotate(dir, aim);
-        createProjectile(projectile, dir, Vector2.zero);
+        createProjectile(projectile, dir, offset);
     }
 
     public override void endAttack()

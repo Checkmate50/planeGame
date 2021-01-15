@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpawner: {fileID: 1446665317485105682, guid: 88282498c87c40840b34acbe7ba33529, type: 3}
-  enemySpawner: {fileID: 794220278405405555, guid: 70d2aff26983b5a4cbc0e56cb9be2f4a, type: 3}
+  enemySpawner: {fileID: 2305253210283484480, guid: e0cf2a7d759677b418d27982531e26ca, type: 3}
   mainCamera: {fileID: 1701389042}
 --- !u!4 &572941151
 Transform:
