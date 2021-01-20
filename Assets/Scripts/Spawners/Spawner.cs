@@ -8,12 +8,12 @@ public abstract class Spawner : MonoBehaviour
     protected int initializedFrameCount;
     protected Vector2 centerPoint;
 
-    public void initialize(GameController gc)
+    public virtual void initialize(GameController gc)
     {
         initialize(gc, new Vector2());
     }
 
-    public void initialize(GameController gc, Vector2 spawnCenterPoint)
+    public virtual void initialize(GameController gc, Vector2 spawnCenterPoint)
     {
         gameController = gc;
         centerPoint = spawnCenterPoint;

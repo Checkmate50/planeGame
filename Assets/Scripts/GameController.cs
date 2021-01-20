@@ -10,11 +10,14 @@ public sealed class GameController : MonoBehaviour
     [SerializeField]
     EnemySpawner enemySpawner;
     [SerializeField]
+    BackgroundSpawner backgroundSpawner;
+    [SerializeField]
     Camera mainCamera;
 
     private List<GameObject> players;
     private List<GameObject> enemies;
     private int score;
+    private int difficulty = 0;
 
     public List<GameObject> Players
     {
@@ -29,6 +32,19 @@ public sealed class GameController : MonoBehaviour
         get
         {
             return mainCamera;
+        }
+    }
+
+    public int Difficulty
+    {
+        get
+        {
+            return difficulty;
+        }
+        set
+        {
+            Debug.Log(value);
+            difficulty = value;
         }
     }
 
@@ -63,7 +79,6 @@ public sealed class GameController : MonoBehaviour
     public void addPlayer(Player p)
     {
         players.Add(p.gameObject);
-        mainCamera.GetComponent<GameCamera>().addTarget(p);
     }
 
     public void playerDeath(Player p)
@@ -110,5 +125,7 @@ public sealed class GameController : MonoBehaviour
         psIns.addPlayer();
         EnemySpawner enIns = Instantiate(enemySpawner);
         enIns.initialize(this);
+        BackgroundSpawner bIns = Instantiate(backgroundSpawner);
+        bIns.initialize(this);
     }
 }

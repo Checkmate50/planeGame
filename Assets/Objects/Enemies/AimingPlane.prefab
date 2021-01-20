@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7916598898204687858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -118,16 +118,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d7e4f346bb44547936495eac09a6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  baseSpeed: 5
+  maxHealth: 12
+  baseSpeed: 6
   moveDown: {fileID: 21300000, guid: 6c08a8be4517b37418b933c9c6378c7b, type: 3}
   moveLeft: {fileID: 21300000, guid: 6c08a8be4517b37418b933c9c6378c7b, type: 3}
   moveUp: {fileID: 21300000, guid: 6c08a8be4517b37418b933c9c6378c7b, type: 3}
   moveRight: {fileID: 21300000, guid: 6c08a8be4517b37418b933c9c6378c7b, type: 3}
-  baseAttackPatterns:
+  difficulty1AttackPatterns:
+  - {fileID: 8985468427848214688, guid: 89a2424f716977a409da0a87a619df3a, type: 3}
+  difficulty2AttackPatterns:
+  - {fileID: 8985468427848214688, guid: 89a2424f716977a409da0a87a619df3a, type: 3}
+  difficulty3AttackPatterns:
+  - {fileID: 8985468427848214688, guid: 89a2424f716977a409da0a87a619df3a, type: 3}
+  difficulty4AttackPatterns:
+  - {fileID: 8985468427848214688, guid: 89a2424f716977a409da0a87a619df3a, type: 3}
   - {fileID: 8985468427848214688, guid: 89a2424f716977a409da0a87a619df3a, type: 3}
   clusteredAttackVariance: 0
-  collisionDamage: 2
+  collisionDamage: 1
   score: 100
 --- !u!58 &4752105992899522719
 CircleCollider2D:

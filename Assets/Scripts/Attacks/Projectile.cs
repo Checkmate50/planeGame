@@ -7,6 +7,8 @@ public class Projectile : Attack
     // Note that a negative value for damage provides healing
     [SerializeField]
     protected float maxSpeed;
+    [SerializeField]
+    protected float difficultySpeedScaling;
 
     protected float speed;
 
@@ -18,6 +20,7 @@ public class Projectile : Attack
     public override void initialize(GameController gc, Character owner, Vector2 offset)
     {
         base.initialize(gc, owner, offset);
+        maxSpeed = maxSpeed + difficultySpeedScaling * gc.Difficulty;
         speed = maxSpeed;
         banTarget(owner.GetInstanceID());
     }

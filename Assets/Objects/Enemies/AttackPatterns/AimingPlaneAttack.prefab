@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8018573226703274796}
   - component: {fileID: 8985468427848214688}
   m_Layer: 0
-  m_Name: AimingAttackPlane
+  m_Name: AimingPlaneAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,6 @@ MonoBehaviour:
   attackCooldownVariance: 0.1
   initialDelay: 0
   projectile: {fileID: 976719750167768878, guid: 8a6983dcbd804344b999aa1eb623f14b, type: 3}
-  projectileCount: 2
+  projectileCount: 1
   aimVariance: 10
   canAttackBackward: 0

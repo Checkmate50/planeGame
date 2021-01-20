@@ -5,7 +5,13 @@ using UnityEngine;
 public abstract class Enemy : Character
 {
     [SerializeField]
-    protected AttackPattern[] baseAttackPatterns;
+    protected AttackPattern[] difficulty1AttackPatterns;
+    [SerializeField]
+    protected AttackPattern[] difficulty2AttackPatterns;
+    [SerializeField]
+    protected AttackPattern[] difficulty3AttackPatterns;
+    [SerializeField]
+    protected AttackPattern[] difficulty4AttackPatterns;
     [SerializeField]
     protected float clusteredAttackVariance;
     [SerializeField]
@@ -28,10 +34,28 @@ public abstract class Enemy : Character
     public override void initialize(GameController gc)
     {
         base.initialize(gc);
-        attackStatuses = new AttackPatternStatus[baseAttackPatterns.Length];
-        for (int i = 0; i < baseAttackPatterns.Length; i++)
+        List<AttackPattern> attackPatterns = new List<AttackPattern>();
+        foreach (AttackPattern ap in difficulty1AttackPatterns)
+            attackPatterns.Add(ap);
+        if (gameController.Difficulty > 0)
         {
-            var attackPattern = Instantiate(baseAttackPatterns[i]);
+            foreach (AttackPattern ap in difficulty2AttackPatterns)
+                attackPatterns.Add(ap);
+            if (gameController.Difficulty > 1)
+            {
+                foreach (AttackPattern ap in difficulty3AttackPatterns)
+                    attackPatterns.Add(ap);
+                if (gameController.Difficulty > 2)
+                {
+                    foreach (AttackPattern ap in difficulty4AttackPatterns)
+                        attackPatterns.Add(ap);
+                }
+            }
+        }
+        attackStatuses = new AttackPatternStatus[attackPatterns.Count];
+        for (int i = 0; i < attackPatterns.Count; i++)
+        {
+            var attackPattern = Instantiate(attackPatterns[i]);
             attackPattern.initialize(gc, this);
             AttackPatternStatus status = new AttackPatternStatus();
             status.attackPattern = attackPattern;
@@ -44,6 +68,7 @@ public abstract class Enemy : Character
     protected override void Start()
     {
         base.Start();
+        Debug.Log(gameController.Difficulty);
     }
 
     protected virtual void setSprite()

@@ -109,7 +109,7 @@ public class Player : Character
                 if (attackStatuses[i].cd <= 0)
                 {
                     attackStatuses[i].attackPattern.attack();
-                    attackStatuses[i].cd = attackStatuses[i].attackPattern.AttackCooldown;
+                    attackStatuses[i].cd += attackStatuses[i].attackPattern.AttackCooldown;
                 }
                 else
                     attackStatuses[i].cd -= Time.deltaTime;
@@ -142,6 +142,23 @@ public class Player : Character
             currVel.x = 0;
         if (currVel.x > 0 && screenPosition.x > pixelWidth - pixelWidth / 50)
             currVel.x = 0;
+
+        if (inputs[right].state)
+        {
+            if (spriteRenderer.sprite == moveLeft)
+                setSprite(moveUp);
+            else
+                setSprite(moveRight);
+        }
+        else if (inputs[left].state)
+        {
+            if (spriteRenderer.sprite == moveRight)
+                setSprite(moveUp);
+            else
+                setSprite(moveLeft);
+        }
+        else
+            GetComponent<SpriteRenderer>().sprite = moveUp;
 
         transform.position += (Vector3)currVel * Time.deltaTime;
     }

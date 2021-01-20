@@ -21,6 +21,7 @@ public abstract class Character : MovableObject
     protected float speed;
     protected int health;
     protected Vector3 moveDir;
+    protected SpriteRenderer spriteRenderer;
     public Vector3 MoveDirection {
         get { return moveDir; }
     }
@@ -39,6 +40,7 @@ public abstract class Character : MovableObject
         base.Start();
         speed = baseSpeed;
         health = maxHealth;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void Update() {
@@ -52,7 +54,7 @@ public abstract class Character : MovableObject
             Debug.LogWarning("Will not switch to null sprite for " + gameObject);
             return;
         }
-        GetComponent<SpriteRenderer>().sprite = s;
+        spriteRenderer.sprite = s;
     }
 
     public Vector2 getVelocity() {
